@@ -46,7 +46,7 @@ export default function Navbar() {
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-          <img src="/favicon.png" alt="Albedrix Logo" />
+          <img src="favicon.png" alt="Albedrix Logo" />
           <div className="logo-text">
             <span>ALBEDRIX</span>
             <small>SYSTEMS</small>
