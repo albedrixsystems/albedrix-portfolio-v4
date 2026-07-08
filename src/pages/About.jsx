@@ -102,7 +102,7 @@ export default function About() {
       </section>
 
       {/* TEAM SECTION (Placeholder) */}
-      <section className="section-padding" style={{ background: 'rgba(255, 45, 85, 0.01)', borderTop: '1px solid var(--border)' }}>
+      {/* <section className="section-padding" style={{ background: 'rgba(255, 45, 85, 0.01)', borderTop: '1px solid var(--border)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">THE MINDSHARE</span>
@@ -138,7 +138,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
