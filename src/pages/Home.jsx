@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/Home.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero/Hero';
@@ -49,7 +50,7 @@ export default function Home() {
       <Hero />
 
       {/* STATS SECTION */}
-      <section ref={statsRef} className="stats-section">
+      {/* <section ref={statsRef} className="stats-section">
         <div className="container">
           <div className="stats-grid">
             <div className="stat-item">
@@ -70,7 +71,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* COMPANY OVERVIEW SECTION */}
       <section className="about-section section-padding">
@@ -218,7 +219,7 @@ export default function Home() {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <Link to="/products" className="secondary-btn magnetic">
+            <Link to="/services" className="secondary-btn magnetic">
               <span>Explore All Products</span>
             </Link>
           </div>

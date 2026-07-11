@@ -99,9 +99,6 @@ export default function Hero() {
       <HeroCanvas />
       <div className="container">
         <div className="hero-content">
-          <div className="hero-badge">
-            <span className="badge-dot"></span>NEXT-GENERATION ENGINEERING
-          </div>
           <h1 className="hero-title">
             <span className="reveal-line">
               <span className="reveal-inner">ALBEDRIX</span>

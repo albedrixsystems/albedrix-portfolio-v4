@@ -26,7 +26,7 @@ export default function HeroCanvas() {
 
     const coreGeo = new THREE.IcosahedronGeometry(2.1, 1);
     const coreMat = new THREE.MeshBasicMaterial({
-      color: 0xff2d55,
+      color: 0xe60000,
       wireframe: true,
       transparent: true,
       opacity: 0.55,
@@ -35,7 +35,7 @@ export default function HeroCanvas() {
     group.add(core);
 
     const fillMat = new THREE.MeshBasicMaterial({
-      color: 0xff5a7a,
+      color: 0xff3333,
       transparent: true,
       opacity: 0.04,
     });

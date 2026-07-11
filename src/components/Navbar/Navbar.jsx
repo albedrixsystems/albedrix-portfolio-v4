@@ -73,16 +73,7 @@ export default function Navbar() {
                 Services
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/products" className={({ isActive }) => isActive ? 'active-link' : ''}>
-                Products
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/technologies" className={({ isActive }) => isActive ? 'active-link' : ''}>
-                Technologies
-              </NavLink>
-            </li>
+
             <li>
               <NavLink to="/contact" className={({ isActive }) => isActive ? 'active-link' : ''}>
                 Contact
@@ -107,6 +98,13 @@ export default function Navbar() {
               rel="noopener noreferrer"
             >
               <i className="fab fa-github"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/albedrix_systems"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fab fa-instagram"></i>
             </a>
             <a
               href="mailto:albedrixsystems@gmail.com"

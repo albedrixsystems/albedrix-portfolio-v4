@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FAQ from '../components/FAQ/FAQ';
+import '../styles/Contact.css';
 
 export default function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', category: 'General Inquiry', message: '' });
@@ -10,14 +11,50 @@ export default function Contact() {
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formState.name || !formState.email || !formState.message) return;
-    setSubmitted(true);
-    setFormState({ name: '', email: '', category: 'General Inquiry', message: '' });
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 4000);
+
+    // TO ACTIVATE IN PRODUCTION: Get your free Access Key from https://web3forms.com/ and paste it below
+    const WEB3FORMS_ACCESS_KEY = "62947879-89e7-4d68-8c6d-bf0b1956c7e3";
+
+    // Fallback/simulation mode if key is not configured:
+    if (WEB3FORMS_ACCESS_KEY === "YOUR_ACCESS_KEY_HERE") {
+      console.log("Demo Mode Submit Payload:", formState);
+      setSubmitted(true);
+      setFormState({ name: '', email: '', category: 'General Inquiry', message: '' });
+      return;
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formState.name,
+          email: formState.email,
+          subject: `New Lead: [${formState.category}] from ${formState.name}`,
+          category: formState.category,
+          message: formState.message,
+          from_name: "Albedrix Portfolio"
+        })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+        setFormState({ name: '', email: '', category: 'General Inquiry', message: '' });
+      } else {
+        alert("Transmission error: " + (result.message || "Please check access key configuration."));
+      }
+    } catch (error) {
+      console.error("Form submit error:", error);
+      alert("Network error: Could not connect to the form transmission server.");
+    }
   };
 
   return (
@@ -38,22 +75,7 @@ export default function Contact() {
       <section className="contact-section section-padding">
         <div className="contact-network" aria-hidden="true"></div>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="contact-socials" style={{ margin: '0 auto 50px' }}>
-            <a href="mailto:albedrixsystems@gmail.com" className="social-card" target="_blank" rel="noopener noreferrer">
-              <i className="fas fa-envelope"></i>
-              <span>Email Us</span>
-            </a>
-            <a href="https://www.linkedin.com/company/albedrix-systems" className="social-card" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-linkedin-in"></i>
-              <span>LinkedIn</span>
-            </a>
-            <a href="https://github.com/albedrixsystems" className="social-card" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-github"></i>
-              <span>GitHub</span>
-            </a>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', alignItems: 'start' }} className="about-grid">
+          <div className="contact-layout-grid">
             {/* CONTACT FORM */}
             <div className="contact-form-container">
               {submitted ? (
@@ -134,33 +156,24 @@ export default function Contact() {
               )}
             </div>
 
-            {/* DETAILS & LOCATION */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              <div className="info-card">
-                <h3><i className="fas fa-clock"></i> Business Hours</h3>
-                <p>
-                  <strong>Monday – Friday</strong>: 9:00 AM – 6:00 PM IST (GMT+5:30)<br />
-                  <strong>Saturday – Sunday</strong>: Emergency support channels only.<br />
-                  <span style={{ color: 'var(--accent)', fontSize: '0.8rem', display: 'block', marginTop: '10px', fontFamily: 'var(--font-mono)' }}>
-                    ACTIVE DEVELOPMENT MONITOR READY
-                  </span>
-                </p>
-              </div>
-
-              <div className="info-card">
-                <h3><i className="fas fa-map-marker-alt"></i> Headquarters Coordinates</h3>
-                <div className="map-placeholder" style={{ marginBottom: '14px' }}>
-                  <div className="map-grid-overlay"></div>
-                  <i className="fas fa-satellite map-marker"></i>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent)', zIndex: 1 }}>
-                    LOCATING LAB CORE...
-                  </span>
-                </div>
-                <p style={{ fontSize: '0.85rem' }}>
-                  <strong>Address</strong>: Albedrix Systems Lab, Electronic City Phase I, Bengaluru, KA 560100, India<br />
-                  <strong>Coordinates</strong>: 12.8452° N, 77.6749° E
-                </p>
-              </div>
+            {/* CONTACT LINKS */}
+            <div className="contact-side-socials">
+              <a href="https://www.linkedin.com/company/albedrix-systems" className="social-card" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/albedrixsystems" className="social-card" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-github"></i>
+                <span>GitHub</span>
+              </a>
+              <a href="https://www.instagram.com/albedrix_systems" className="social-card" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-instagram"></i>
+                <span>Instagram</span>
+              </a>
+              <a href="mailto:albedrixsystems@gmail.com" className="social-card" target="_blank" rel="noopener noreferrer">
+                <i className="fas fa-envelope"></i>
+                <span>Email Us</span>
+              </a>
             </div>
           </div>
         </div>

@@ -1,9 +1,64 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import FAQ from '../components/FAQ/FAQ';
+import '../styles/Services.css';
+
+function ProjectCard({ status, statusColor, tags, title, description }) {
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(230, 0, 0, 0.15), rgba(255, 255, 255, 0.03))`;
+  };
+
+  const handleMouseLeave = () => {
+    if (cardRef.current) {
+      cardRef.current.style.background = '';
+    }
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      className="project-card"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="project-content">
+        <div className="project-status">
+          <span
+            className="status-dot"
+            style={{
+              background: statusColor,
+              boxShadow: `0 0 8px ${statusColor}, 0 0 16px ${statusColor}`
+            }}
+          ></span>
+          <span className="status-text">{status}</span>
+        </div>
+        <div className="project-tags">
+          {tags.map((tag, idx) => (
+            <span key={idx}>{tag}</span>
+          ))}
+        </div>
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function Services() {
   const servicesList = [
+    {
+      icon: 'fa-users',
+      title: 'Implant & Internships',
+      description: 'Implanting Albedrix with a team of exceptional developers and interns with a passion for AI, Embedded Systems, IoT, and everything in between.',
+      tags: ['Internships', 'Embedded Systems', 'AI', 'IoT', 'Full Stack']
+    },
     {
       icon: 'fa-microchip',
       title: 'Embedded Systems',
@@ -27,12 +82,6 @@ export default function Services() {
       title: 'Full Stack Engineering',
       description: 'Modern, scalable web and software systems for intelligent platforms.',
       tags: ['React', 'Node.js', 'Next.js', 'MongoDB', 'Docker']
-    },
-    {
-      icon: 'fa-cogs',
-      title: 'Intelligent Automation',
-      description: 'Futuristic automation systems powered by AI and embedded control loops.',
-      tags: ['Sensors', 'Control Systems', 'Python']
     },
     {
       icon: 'fa-lightbulb',
@@ -72,6 +121,23 @@ export default function Services() {
       index: '06',
       title: 'Delivery',
       description: 'Ship with documentation, support, and a clean handover.'
+    }
+  ];
+
+  const productsList = [
+    {
+      status: 'Active Research & Study',
+      statusColor: '#22c55e',
+      tags: ['Healthcare Technology', 'ECG Analysis', 'Embedded Intelligence'],
+      title: 'ECG Emotion Analysis System',
+      description: 'AI-powered ECG analytics system for emotion detection and biomedical signal interpretation.'
+    },
+    {
+      status: 'Design Phase',
+      statusColor: '#f59e0b',
+      tags: ['Embedded', 'Power Systems', 'Portable Tech'],
+      title: 'Portable Laptop Powerbank',
+      description: 'Portable high-capacity power solution designed for laptops and mobile engineering workflows.'
     }
   ];
 
@@ -133,8 +199,30 @@ export default function Services() {
         </div>
       </section>
 
+      {/* PRODUCTS & RESEARCH SHOWCASE */}
+      <section className="projects-section section-padding">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-subtitle">PROJECT PORTFOLIO</span>
+            <h2 className="section-title">Products & Research Showcase</h2>
+          </div>
+          <div className="projects-wrapper">
+            {productsList.map((product, idx) => (
+              <ProjectCard
+                key={idx}
+                status={product.status}
+                statusColor={product.statusColor}
+                tags={product.tags}
+                title={product.title}
+                description={product.description}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* INDUSTRIES SECTION (Placeholder) */}
-      <section className="section-padding">
+      <section className="section-padding" style={{ borderTop: '1px solid var(--border)' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">DOMAINS</span>
@@ -166,7 +254,7 @@ export default function Services() {
       </section>
 
       {/* CONSULTATION PROCESS */}
-      <section className="section-padding" style={{ background: 'rgba(255, 45, 85, 0.01)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+      <section className="section-padding" style={{ background: 'rgba(230, 0, 0, 0.01)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <div className="section-header">
             <span className="section-subtitle">PARTNERSHIP</span>
@@ -180,17 +268,6 @@ export default function Services() {
           <Link to="/contact" className="primary-btn magnetic">
             <span>Book A Discovery Call</span>
           </Link>
-        </div>
-      </section>
-
-      {/* FAQ SECTION (Moved to the bottom of Services page) */}
-      <section className="faq-section section-padding">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-subtitle">FAQ</span>
-            <h2 className="section-title">Common Questions</h2>
-          </div>
-          <FAQ />
         </div>
       </section>
     </>

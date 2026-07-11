@@ -4,8 +4,6 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import Products from './pages/Products';
-import Technologies from './pages/Technologies';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import ComingSoon from './pages/ComingSoon';
@@ -25,8 +23,6 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="services" element={<Services />} />
-          <Route path="products" element={<Products />} />
-          <Route path="technologies" element={<Technologies />} />
           <Route path="contact" element={<Contact />} />
           <Route path="coming-soon" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />

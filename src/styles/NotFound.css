@@ -1,0 +1,24 @@
+/* ========================================= */
+/* ALBEDRIX SYSTEMS - 404/NOTFOUND SPECIFIC   */
+/* ========================================= */
+
+/* 404 PAGE styles */
+.notfound-container {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 80px 20px;
+}
+
+.notfound-code {
+  font-family: var(--font-mono);
+  font-size: clamp(6rem, 15vw, 10rem);
+  font-weight: 800;
+  color: var(--accent);
+  text-shadow: var(--shadow-glow);
+  line-height: 1;
+  margin-bottom: 20px;
+}
