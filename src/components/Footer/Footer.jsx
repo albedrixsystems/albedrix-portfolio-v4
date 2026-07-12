@@ -99,7 +99,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>© 2026 Albedrix Systems — All rights reserved.</p>
           <p className="developer-credit">
-            Website developed by <a href="https://abubackar.netlify.app/" target="_blank" rel="noopener noreferrer">Abubackar Siddiq S</a>
+            Designed & Developed by <a href="https://abubackar.netlify.app/" target="_blank" rel="noopener noreferrer">Abubackar Siddiq S</a> & <a href="https://nikeshbabu-portfolio.netlify.app/" target="_blank" rel="noopener noreferrer">Nikesh Babu S</a>
           </p>
         </div>
       </div>
